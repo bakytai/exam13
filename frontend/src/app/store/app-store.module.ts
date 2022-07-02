@@ -4,6 +4,10 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 import { usersReducer } from './users/users.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { UsersEffects } from './users/users.effects';
+import { placesReducer } from './places/places.reducer';
+import { PlacesEffects } from './places/places.effects';
+import { imageReducer } from './images/image.reducer';
+import { ImagesEffects } from './images/image.effects';
 
 const localStorageSyncReducer = (reducer: ActionReducer<any>) => {
   return localStorageSync({
@@ -16,10 +20,12 @@ const metaReducers: MetaReducer[] = [localStorageSyncReducer];
 
 const reducers = {
   users: usersReducer,
+  places: placesReducer,
+  images: imageReducer
 };
 
 const effects = [
-  UsersEffects
+  UsersEffects, PlacesEffects, ImagesEffects
 ];
 
 @NgModule({

@@ -6,7 +6,7 @@
       fxLayoutAlign="space-between center"
     >
       <div>
-        <a routerLink="/" style="color: white;">Photo gallery!</a>
+        <a routerLink="/" style="color: white;">Cafe critic</a>
       </div>
       <nav fxLayout="row" fxLayoutAlign="space-between" *appUserType="'user' else anonMenu">
 
@@ -17,6 +17,7 @@
           <button mat-menu-item disabled>{{ (user | async)?.email }}</button>
           <button mat-menu-item>Profile</button>
           <button mat-menu-item (click)="logout()">Logout</button>
+          <button mat-menu-item>Add new places</button>
         </mat-menu>
       </nav>
     </mat-toolbar>

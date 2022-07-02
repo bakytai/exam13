@@ -35,9 +35,18 @@ const PlaceSchema = new Schema({
     },
     rate: {
         type: Number,
-        default: 0.0
+        default: 0
     },
-});
+    kitchenRate: {
+        type: Number,
+    },
+    serviceRate: {
+        type: Number,
+    },
+    interiorRate: {
+        type: Number
+    }
+    });
 
 const Place = mongoose.model('Place', PlaceSchema);
 

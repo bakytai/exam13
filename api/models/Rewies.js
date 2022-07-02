@@ -12,10 +12,22 @@ const ReviewSchema = new Schema({
         required: true,
         ref: 'Place',
     },
-    rate: {
+    message: {
+        type: String,
+        required: true
+    },
+    kitchenRate: {
         type: Number,
-        required: true,
-    }
+        required: true
+    },
+    serviceRate: {
+        type: Number,
+        required: true
+    },
+    interiorRate: {
+        type: Number,
+        required: true
+    },
 });
 
 const Review = mongoose.model('Review', ReviewSchema);
