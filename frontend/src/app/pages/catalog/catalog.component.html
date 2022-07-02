@@ -9,6 +9,9 @@
           <a mat-raised-button color="accent" [routerLink]="['/place/', place._id]">{{ place.title }}</a>
         </mat-card-content>
       </mat-card>
+
+      <button *appHasRoles="['admin']" mat-button
+              (click)="deletePlace(place._id)">DELETE</button>
     </div>
   </div>
 </div>

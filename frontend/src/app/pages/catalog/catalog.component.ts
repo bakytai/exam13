@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../store/type';
 import { Place } from '../../models/place.model';
-import { fetchPlacesRequest } from '../../store/places/places.actions';
+import { deletePlaceRequest, fetchPlacesRequest } from '../../store/places/places.actions';
 
 @Component({
   selector: 'app-catalog',
@@ -23,5 +23,9 @@ export class CatalogComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(fetchPlacesRequest());
+  }
+
+  deletePlace(idPLace: string) {
+    this.store.dispatch(deletePlaceRequest({id: idPLace}))
   }
 }
