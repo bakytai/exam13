@@ -69,4 +69,16 @@ router.post("/", auth, async (req, res, next) => {
     }
 });
 
+router.delete('/:id', auth, async (req, res, next) => {
+    try {
+        if (req.user.role === 'admin'){
+            const review = await Reviews.deleteOne({_id: req.params.id});
+            return res.send({message: 'Deleted review!'});
+        }
+        return  res.status(400).send({error: 'you dont have right'});
+    } catch (e) {
+        return next(e)
+    }
+});
+
 module.exports = router;

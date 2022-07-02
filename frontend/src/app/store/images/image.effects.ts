@@ -6,7 +6,7 @@ import { catchError, mergeMap, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   createImageRequest,
-  createImageSuccess,
+  createImageSuccess, deleteImageFailure, deleteImageRequest, deleteImageSuccess,
   fetchImagesFailure,
   fetchImagesRequest,
   fetchImagesSuccess
@@ -36,6 +36,18 @@ export class ImagesEffects {
         this.helpers.openSnackbar('Картинка добавлена!');
       }),
       catchError(() => of(createReviewsFailure({error: 'Wrong Data'})))
+    ))
+  ));
+
+  deleteImg = createEffect(() => this.actions.pipe(
+    ofType(deleteImageRequest),
+    mergeMap(({id, place}) => this.imageService.deleteImg(id).pipe(
+      map(() => deleteImageSuccess()),
+      tap(() => {
+        this.store.dispatch(fetchImagesRequest({id: place}));
+        this.helpers.openSnackbar('Image deleted!');
+      }),
+      catchError(() => of(deleteImageFailure({error: 'Wrong Data'})))
     ))
   ));
 

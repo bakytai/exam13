@@ -8,6 +8,8 @@ import {
   createReviewsFailure,
   createReviewsRequest,
   createReviewsSuccess,
+  deleteReviewRequest,
+  deleteReviewSuccess,
   fetchReviewsFailure,
   fetchReviewsRequest,
   fetchReviewsSuccess
@@ -16,6 +18,7 @@ import { ReviewsService } from '../../services/reviews.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../type';
 import { fetchPlaceRequest } from '../places/places.actions';
+import { deleteImageFailure } from '../images/image.actions';
 
 @Injectable()
 
@@ -38,6 +41,19 @@ export class ReviewsEffects {
         this.helpers.openSnackbar('Отзыв добавлен!');
       }),
       catchError(() => of(createReviewsFailure({error: 'Wrong Data'})))
+    ))
+  ));
+
+
+  deleteReview = createEffect(() => this.actions.pipe(
+    ofType(deleteReviewRequest),
+    mergeMap(({id, place}) => this.reviewsService.deleteReview(id).pipe(
+      map(() => deleteReviewSuccess()),
+      tap(() => {
+        this.store.dispatch(fetchReviewsRequest({id: place}));
+        this.helpers.openSnackbar('Review deleted!');
+      }),
+      catchError(() => of(deleteImageFailure({error: 'Wrong Data'})))
     ))
   ));
 

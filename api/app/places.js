@@ -1,5 +1,6 @@
 const express = require('express');
 const Place = require('../models/Place');
+const Review = require('../models/Reviews');
 const path = require("path");
 const auth = require("../middleware/auth");
 const multer = require("multer");
@@ -37,7 +38,6 @@ router.get('/:id', async (req, res, next) => {
             return res.status(404).send({message: 'Not found place'});
         }
 
-        console.log(place)
         return res.send(place);
     } catch (e) {
         next(e);
@@ -72,4 +72,18 @@ router.post("/", auth, upload.single('image'), async (req, res, next) => {
     }
 });
 
+router.delete('/:id', auth, async (req, res, next) => {
+    try {
+        if (req.user.role === 'admin'){
+            const place = await Place.deleteOne({_id: req.params.id});
+            await Image.deleteMany({place: req.params.id});
+            await Review.deleteMany({place: req.params.id});
+
+            return res.send({message: 'Deleted place!'});
+        }
+        return  res.status(400).send({error: 'you dont have right'});
+    } catch (e) {
+        return next(e)
+    }
+});
 module.exports = router;

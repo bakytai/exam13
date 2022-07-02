@@ -58,4 +58,15 @@ router.post("/", auth, upload.single('image'), async (req, res, next) => {
 });
 
 
+router.delete('/:id', auth, async (req, res, next) => {
+    try {
+        if (req.user.role === 'admin'){
+            const image = await Image.deleteOne({_id: req.params.id});
+            return res.send({message: 'Deleted place!'});
+        }
+        return  res.status(400).send({error: 'you dont have right'});
+    } catch (e) {
+        return next(e)
+    }
+});
 module.exports = router;

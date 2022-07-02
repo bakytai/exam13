@@ -7,13 +7,21 @@ import { PlacesService } from '../../services/places.service';
 import {
   createPlaceFailure,
   createPlaceRequest,
-  createPlaceSuccess, fetchPlaceFailure, fetchPlaceRequest,
+  createPlaceSuccess,
+  deletePlaceRequest,
+  deletePlaceSuccess,
+  fetchPlaceFailure,
+  fetchPlaceRequest,
   fetchPlacesFailure,
   fetchPlacesRequest,
-  fetchPlacesSuccess, fetchPlaceSuccess
+  fetchPlacesSuccess,
+  fetchPlaceSuccess
 } from './places.actions';
 
 import { HelpersService } from '../../services/helpers.service';
+import { deleteImageFailure } from '../images/image.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from '../type';
 
 @Injectable()
 
@@ -46,10 +54,23 @@ export class PlacesEffects {
     ))
   ));
 
+  deletePlace = createEffect(() => this.actions.pipe(
+    ofType(deletePlaceRequest),
+    mergeMap(({id}) => this.placeService.deletePlace(id).pipe(
+      map(() => deletePlaceSuccess()),
+      tap(() => {
+        this.store.dispatch(fetchPlacesRequest());
+        this.helpers.openSnackbar('Place deleted!');
+      }),
+      catchError(() => of(deleteImageFailure({error: 'Wrong Data'})))
+    ))
+  ));
+
   constructor(
     private router: Router,
     private actions: Actions,
     private placeService: PlacesService,
-    private helpers: HelpersService
-  ) {}
+    private helpers: HelpersService,
+    private store: Store<AppState>
+) {}
 }

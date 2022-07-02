@@ -4,6 +4,9 @@ import {
   createReviewsFailure,
   createReviewsRequest,
   createReviewsSuccess,
+  deleteReviewFailure,
+  deleteReviewRequest,
+  deleteReviewSuccess,
   fetchReviewsFailure,
   fetchReviewsRequest,
   fetchReviewsSuccess
@@ -35,4 +38,11 @@ export const reviewsReducer = createReducer(
     ...state,
     createLoading: false,
     createError: error})),
+
+  on(deleteReviewRequest, state => ({...state, deleteLoading: true})),
+  on(deleteReviewSuccess, state => ({...state, deleteLoading: false})),
+  on(deleteReviewFailure, (state, {error}) => ({
+    ...state,
+    deleteLoading: false,
+    deleteError: error})),
 )

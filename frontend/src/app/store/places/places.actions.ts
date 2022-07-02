@@ -39,7 +39,7 @@ export const createPlaceFailure = createAction(
 
 export const deletePlaceRequest = createAction(
   '[Place] Delete Request',
-  props<{id: string, }>()
+  props<{id: string}>()
 );
 export const deletePlaceSuccess = createAction(
   '[Place] Delete Success'

@@ -31,4 +31,8 @@ export class ImagesService {
 
     return this.http.post(environment.apiUrl + '/images', formData);
   }
+
+  deleteImg(id: string) {
+    return this.http.delete(environment.apiUrl + '/images/' + id);
+  }
 }

@@ -33,4 +33,8 @@ export class ReviewsService {
   createReviews(reviewsData: ReviewsData) {
     return this.http.post<Reviews>(environment.apiUrl + '/reviews', reviewsData);
   }
+
+  deleteReview(id: string) {
+    return this.http.delete(environment.apiUrl + '/reviews/' + id);
+  }
 }

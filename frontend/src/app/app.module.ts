@@ -33,6 +33,7 @@ import { PlaceFormComponent } from './pages/place-form/place-form.component';
 import { InfoPlaceComponent } from './pages/info-place/info-place.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HasRolesDirective } from './directives/has-roles.directive';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CatalogComponent,
     ImagePipe,
     PlaceFormComponent,
-    InfoPlaceComponent
+    InfoPlaceComponent,
+    HasRolesDirective
   ],
   imports: [
     BrowserModule,

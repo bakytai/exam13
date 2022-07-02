@@ -5,10 +5,10 @@ import { AppState } from '../../store/type';
 import { Place } from '../../models/place.model';
 import { Store } from '@ngrx/store';
 import { fetchPlaceRequest } from '../../store/places/places.actions';
-import { createImageRequest, fetchImagesRequest } from '../../store/images/image.actions';
+import { createImageRequest, deleteImageRequest, fetchImagesRequest } from '../../store/images/image.actions';
 import { Image, ImageData } from '../../models/image.model';
 import { Reviews, ReviewsData } from '../../models/reviews.model';
-import { createReviewsRequest, fetchReviewsRequest } from '../../store/reviews/reviews.actions';
+import { createReviewsRequest, deleteReviewRequest, fetchReviewsRequest } from '../../store/reviews/reviews.actions';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -72,14 +72,12 @@ export class InfoPlaceComponent implements OnInit {
 
     this.place.subscribe(place => {
       this.placeInfo = <Place>place
-      console.log(this.placeInfo);
     });
   }
 
   createReview() {
     const reviewData: ReviewsData = this.formReview.value;
     reviewData.place = this.placeId;
-
     this.store.dispatch(createReviewsRequest({reviewsData: reviewData}));
   }
 
@@ -87,5 +85,14 @@ export class InfoPlaceComponent implements OnInit {
     const imageData: ImageData = this.imageForm.value;
     imageData.place = this.placeId;
     this.store.dispatch(createImageRequest({imageData}));
+  }
+
+
+  deleteReview(idReview: string) {
+    this.store.dispatch(deleteReviewRequest({id: idReview,place: this.placeInfo._id}));
+  }
+
+  deleteImage(idImg: string) {
+    this.store.dispatch(deleteImageRequest({id: idImg,place: this.placeInfo._id}));
   }
 }

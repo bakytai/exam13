@@ -4,6 +4,9 @@ import {
   createPlaceFailure,
   createPlaceRequest,
   createPlaceSuccess,
+  deletePlaceFailure,
+  deletePlaceRequest,
+  deletePlaceSuccess,
   fetchPlaceFailure,
   fetchPlaceRequest,
   fetchPlacesFailure,
@@ -47,4 +50,11 @@ export const placesReducer = createReducer(
     ...state,
     createLoading: false,
     createError: error})),
+
+  on(deletePlaceRequest, state => ({...state, deleteLoading: true})),
+  on(deletePlaceSuccess, state => ({...state, deleteLoading: false})),
+  on(deletePlaceFailure, (state, {error}) => ({
+    ...state,
+    deleteLoading: false,
+    deleteError: error})),
 )
