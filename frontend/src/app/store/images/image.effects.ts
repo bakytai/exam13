@@ -1,4 +1,4 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
@@ -32,7 +32,7 @@ export class ImagesEffects {
     mergeMap(({imageData}) => this.imageService.addImage(imageData).pipe(
       map(() => createImageSuccess()),
       tap(() => {
-        this.store.dispatch(fetchImagesRequest({id: this.route.snapshot.params['id']}))
+        this.store.dispatch(fetchImagesRequest({id: imageData.place}));
         this.helpers.openSnackbar('Картинка добавлена!');
       }),
       catchError(() => of(createReviewsFailure({error: 'Wrong Data'})))
@@ -44,7 +44,6 @@ export class ImagesEffects {
     private actions: Actions,
     private imageService: ImagesService,
     private helpers: HelpersService,
-    private store: Store<AppState>,
-    private route: ActivatedRoute,
+    private store: Store<AppState>
   ) {}
 }

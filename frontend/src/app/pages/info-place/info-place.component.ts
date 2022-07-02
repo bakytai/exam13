@@ -7,15 +7,16 @@ import { Store } from '@ngrx/store';
 import { fetchPlaceRequest } from '../../store/places/places.actions';
 import { createImageRequest, fetchImagesRequest } from '../../store/images/image.actions';
 import { Image, ImageData } from '../../models/image.model';
-import { Reviews } from '../../models/reviews.model';
-import { fetchReviewsRequest } from '../../store/reviews/reviews.actions';
+import { Reviews, ReviewsData } from '../../models/reviews.model';
+import { createReviewsRequest, fetchReviewsRequest } from '../../store/reviews/reviews.actions';
 import { User } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-info-place',
   templateUrl: './info-place.component.html',
-  styleUrls: ['./info-place.component.sass']
+  styleUrls: ['./info-place.component.sass'],
 })
 export class InfoPlaceComponent implements OnInit {
   @ViewChild('reviewForm') formReview!: NgForm;
@@ -40,7 +41,7 @@ export class InfoPlaceComponent implements OnInit {
   ratingNumber = [1,2,3,4,5];
   placeId!: string;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private config: NgbRatingConfig) {
     this.place = store.select(state => state.places.place);
     this.loading = store.select(state => state.places.fetchLoading);
     this.error = store.select(state => state.places.fetchError);
@@ -56,6 +57,10 @@ export class InfoPlaceComponent implements OnInit {
     this.reviewsCreateFailure = store.select(state => state.reviews.createError);
 
     this.user = store.select(state => state.users.user);
+
+    config.max = 5;
+    config.readonly = true;
+
   }
 
   ngOnInit(): void {
@@ -68,10 +73,15 @@ export class InfoPlaceComponent implements OnInit {
     this.place.subscribe(place => {
       this.placeInfo = <Place>place
     });
+
+    console.log(this.reviews)
   }
 
   createReview() {
+    const reviewData: ReviewsData = this.formReview.value;
+    reviewData.place = this.placeId;
 
+    this.store.dispatch(createReviewsRequest({reviewsData: reviewData}));
   }
 
   addImage() {

@@ -14,7 +14,7 @@ const ReviewSchema = new Schema({
     },
     dateTime: {
         type: Date,
-        default: Date.now.toString()
+        default: Date.now
     },
     message: {
         type: String,

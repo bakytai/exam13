@@ -8,11 +8,8 @@
       <p style="font-weight: bold; font-size: 20px"><b>{{ placeInfo.description }}</b></p>
     </mat-card-content>
 
-
     <div class="gallery">
-
       <h2>Gallery: </h2>
-
       <div fxLayout="row wrap" style="padding: 10px">
         <div *ngFor="let image of gallery | async">
           <mat-card class="example-card" style="width: 14rem; margin: 5px">
@@ -24,80 +21,102 @@
 
     <div class="reviews">
       <h2>Reviews: </h2>
-
       <div fxLayout="row wrap" style="padding: 20px">
         <div *ngFor="let review of reviews | async">
-          <mat-card class="example-card" style="width: 14rem; margin: 5px">
+          <mat-card class="example-card" style="width: 15rem; margin: 5px">
             <mat-card-content>
-              <h3>On <span style="font-size: 15px">{{ review.dateTime }}</span>, <b>{{ review.user.displayName }}</b>
+              <h3>On <span style="font-size: 15px">{{ review.dateTime }}</span>, User: <b>{{ review.user.displayName }}</b>
                 said:</h3>
               <p> {{  review.message }}</p>
+              <ul>
+                <li>
+                  Quality of food
+                  <ngb-rating [(rate)]="review.kitchenRate">
+                    <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                    </ng-template>
+                  </ngb-rating>
+                </li>
+                <li>
+                  Service quality
+                  <ngb-rating [(rate)]="review.serviceRate">
+                    <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                    </ng-template>
+                  </ngb-rating>
+                </li>
+                <li>
+                  Interior
+                  <ngb-rating [(rate)]="review.interiorRate">
+                    <ng-template let-fill="fill" let-index="index">
+                      <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                    </ng-template>
+                  </ngb-rating>
+                </li>
+              </ul>
             </mat-card-content>
           </mat-card>
         </div>
       </div>
     </div>
-
-
-    <div class="reviews-form" *ngIf="user">
-      <h2>Add review</h2>
-
-      <form (ngSubmit)="createReview()" #reviewForm="ngForm">
-        <mat-form-field appearance="outline" class="textarea">
-          <mat-label>Enter message</mat-label>
-          <textarea matInput rows="10" required name="message" ngModel></textarea>
-        </mat-form-field>
-        <div class="select">
-          <mat-form-field appearance="fill">
-            <mat-label>Quality of food</mat-label>
-            <mat-select  name="kitchenRate" required ngModel>
-              <mat-option
-                *ngFor="let number of ratingNumber"
-                [value]="number">{{ number }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Service quality</mat-label>
-            <mat-select name="serviceRate" required ngModel>
-              <mat-option
-                *ngFor="let number of ratingNumber"
-                [value]="number">{{ number }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Interior</mat-label>
-            <mat-select name="interiorRate" required ngModel>
-              <mat-option
-                *ngFor="let number of ratingNumber"
-                [value]="number">{{ number }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <button type="submit" mat-raised-button color="warn" [disabled]="reviewForm.invalid">
-            Add review
-          </button>
-        </div>
-      </form>
-    </div>
-
-
-    <div class="image-form" fxLayout="column">
-      <h2>Upload new photo:</h2>
-
-      <form (ngSubmit)="addImage()" #formImage="ngForm">
-        <mat-form-field appearance="outline" style="width: 50%">
-          <mat-label>Image</mat-label>
-          <app-file-input name="image" ngModel required></app-file-input>
-        </mat-form-field>
-
-        <button type="submit" mat-raised-button color="warn" [disabled]="formImage.invalid">Add</button>
-      </form>
-    </div>
-
     <!--    <mat-card-actions>-->
     <!--      <button mat-button (click)="deleteProduct(productInfo._id)">DELETE</button>-->
     <!--    </mat-card-actions>-->
   </mat-card>
+
+
+  <div class="reviews-form" *ngIf="user | async">
+    <h2>Add review</h2>
+    <form (ngSubmit)="createReview()" #reviewForm="ngForm">
+      <mat-form-field appearance="outline" class="textarea">
+        <mat-label>Enter message</mat-label>
+        <textarea matInput rows="10" required name="message" ngModel></textarea>
+      </mat-form-field>
+      <div class="select">
+        <mat-form-field appearance="fill">
+          <mat-label>Quality of food</mat-label>
+          <mat-select  name="kitchenRate" required ngModel>
+            <mat-option
+              *ngFor="let number of ratingNumber"
+              [value]="number">{{ number }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Service quality</mat-label>
+          <mat-select name="serviceRate" required ngModel>
+            <mat-option
+              *ngFor="let number of ratingNumber"
+              [value]="number">{{ number }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Interior</mat-label>
+          <mat-select name="interiorRate" required ngModel>
+            <mat-option
+              *ngFor="let number of ratingNumber"
+              [value]="number">{{ number }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="warn" [disabled]="reviewForm.invalid">
+          Add review
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="image-form" fxLayout="column" *ngIf="user | async">
+    <h2>Upload new photo:</h2>
+    <form (ngSubmit)="addImage()" #formImage="ngForm">
+      <mat-form-field appearance="outline" style="width: 50%">
+        <mat-label>Image</mat-label>
+        <app-file-input name="image" ngModel required></app-file-input>
+      </mat-form-field>
+
+      <button type="submit" mat-raised-button color="warn" [disabled]="formImage.invalid">Add</button>
+    </form>
+  </div>
 </div>

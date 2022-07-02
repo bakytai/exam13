@@ -32,7 +32,7 @@ export class ReviewsEffects {
     mergeMap(({reviewsData}) => this.reviewsService.createReviews(reviewsData).pipe(
       map(() => createReviewsSuccess()),
       tap(() => {
-        this.store.dispatch(fetchReviewsRequest({id: this.route.snapshot.params['id']}))
+        this.store.dispatch(fetchReviewsRequest({id: reviewsData.place}));
         this.helpers.openSnackbar('Отзыв добавлен!');
       }),
       catchError(() => of(createReviewsFailure({error: 'Wrong Data'})))
