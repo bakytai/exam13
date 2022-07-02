@@ -1,0 +1,44 @@
+<div class="container">
+  <mat-card class="example-card" *ngIf="placeInfo" fxLayout="row wrap" >
+    <mat-card-header style="width: 50%; margin: auto 0">
+      <mat-card-title style="font-weight: bold; font-size: 50px">{{ placeInfo.title}}</mat-card-title>
+    </mat-card-header>
+    <img style="width: 50%" [src]="placeInfo.photo | image" [alt]="placeInfo.title">
+    <mat-card-content style="width: 70%; margin-top: 20px">
+      <p style="font-weight: bold; font-size: 20px"><b>{{ placeInfo.description }}</b></p>
+    </mat-card-content>
+
+
+    <div class="gallery">
+
+      <h2>Gallery: </h2>
+
+      <div fxLayout="row wrap" style="padding: 10px">
+        <div *ngFor="let image of gallery | async">
+          <mat-card class="example-card" style="width: 14rem; margin: 5px" >
+            <img mat-card-xl-image [src]="image.image | image" [alt]="'Photo of ' + placeInfo.title">
+          </mat-card>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviews">
+      <h2>Reviews: </h2>
+
+<!--      <mat-card class="example-card" *ngIf="productInfo">-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title>{{ productInfo.title}}</mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <img mat-card-image [src]="productInfo.image | image" [alt]="productInfo.title">-->
+<!--        <mat-card-content>-->
+<!--          <mat-card-title>Category of {{ productInfo.category.title }}</mat-card-title>-->
+<!--          <p>Description: <b>{{ productInfo.description }}</b></p>-->
+<!--          <span>Product by: <b>{{ productInfo.user.displayName }}</b></span>-->
+<!--          <p>Phone Number: <b>{{ productInfo.user.phoneNumber }}</b></p>-->
+<!--        </mat-card-content>-->
+    </div>
+<!--    <mat-card-actions>-->
+<!--      <button mat-button (click)="deleteProduct(productInfo._id)">DELETE</button>-->
+<!--    </mat-card-actions>-->
+  </mat-card>
+</div>

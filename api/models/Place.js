@@ -37,15 +37,15 @@ const PlaceSchema = new Schema({
         type: Number,
         default: 0
     },
-    kitchenRate: {
-        type: Number,
-    },
-    serviceRate: {
-        type: Number,
-    },
-    interiorRate: {
-        type: Number
-    }
+    // kitchenRate: {
+    //     type: Number,
+    // },
+    // serviceRate: {
+    //     type: Number,
+    // },
+    // interiorRate: {
+    //     type: Number
+    // }
     });
 
 const Place = mongoose.model('Place', PlaceSchema);

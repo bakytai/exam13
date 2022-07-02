@@ -30,6 +30,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ImagePipe } from './pipe/image.pipe';
 import { PlaceFormComponent } from './pages/place-form/place-form.component';
+import { InfoPlaceComponent } from './pages/info-place/info-place.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PlaceFormComponent } from './pages/place-form/place-form.component';
     ValidateIdenticalDirective,
     CatalogComponent,
     ImagePipe,
-    PlaceFormComponent
+    PlaceFormComponent,
+    InfoPlaceComponent
   ],
   imports: [
     BrowserModule,

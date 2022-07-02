@@ -23,16 +23,28 @@ const upload = multer({storage});
 router.get("/", async (req, res, next) => {
     try {
         const places = await Place.find();
-
         return res.send(places);
     } catch(e) {
         next(e);
     }
 });
 
+router.get('/:id', async (req, res, next) => {
+    try {
+        const place = await Place.findById(req.params.id)
+
+        if (!place) {
+            return res.status(404).send({message: 'Not found place'});
+        }
+
+        return res.send(place);
+    } catch (e) {
+        next(e);
+    }
+});
+
 router.post("/", auth, upload.single('image'), async (req, res, next) => {
     try {
-        console.log(req.body)
         if (!req.body.check) {
             return res.status(400).send({error: 'Please check the box!'});
         }

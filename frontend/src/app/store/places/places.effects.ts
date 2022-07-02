@@ -7,10 +7,10 @@ import { PlacesService } from '../../services/places.service';
 import {
   createPlaceFailure,
   createPlaceRequest,
-  createPlaceSuccess,
+  createPlaceSuccess, fetchPlaceFailure, fetchPlaceRequest,
   fetchPlacesFailure,
   fetchPlacesRequest,
-  fetchPlacesSuccess
+  fetchPlacesSuccess, fetchPlaceSuccess
 } from './places.actions';
 
 import { HelpersService } from '../../services/helpers.service';
@@ -23,6 +23,14 @@ export class PlacesEffects {
     mergeMap(() => this.placeService.getPlaces().pipe(
       map(places => fetchPlacesSuccess({places})),
       catchError(() => of(fetchPlacesFailure({error: 'Something went wrong'})))
+    ))
+  ));
+
+  fetchPlaceInfo = createEffect(() => this.actions.pipe(
+    ofType(fetchPlaceRequest),
+    mergeMap(({id}) => this.placeService.getPlaceInfo(id).pipe(
+      map(place => fetchPlaceSuccess({place})),
+      catchError(() => of(fetchPlaceFailure({error: 'Something went wrong'})))
     ))
   ));
 

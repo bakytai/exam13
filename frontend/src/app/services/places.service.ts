@@ -21,6 +21,14 @@ export class PlacesService {
     );
   }
 
+  getPlaceInfo(id: string) {
+    return this.http.get<Place>(environment.apiUrl + `/places/${id}`).pipe(
+      map(data => {
+        return new Place(data._id,data.user, data.title, data.description, data.photo, data.rate);
+      })
+    );
+  }
+
   createPlace(placeData: PlaceData) {
     const formData = new FormData();
     Object.keys(placeData).forEach(key => {

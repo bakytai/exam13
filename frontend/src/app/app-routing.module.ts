@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CatalogComponent } from './pages/catalog/catalog.component';
 import { PlaceFormComponent } from './pages/place-form/place-form.component';
 import { RoleGuardService } from './services/role-guard.service';
+import { InfoPlaceComponent } from './pages/info-place/info-place.component';
 
 const routes: Routes = [
   {path: '', component: CatalogComponent},
@@ -14,7 +15,9 @@ const routes: Routes = [
     path: 'new/place',
     canActivate: [RoleGuardService],
     data: {roles: ['admin', 'user']},
-    component: PlaceFormComponent},
+    component: PlaceFormComponent
+  },
+  {path: 'place/:id', component: InfoPlaceComponent}
 ];
 
 @NgModule({

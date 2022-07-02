@@ -18,7 +18,10 @@
         <app-file-input name="image" ngModel required></app-file-input>
       </mat-form-field>
 
-      <input class="check" type="checkbox" name="check" required  ngModel>
+      <label for="check">
+        By submitting this form, you agree that the following information will be submitted to the public domain.
+      </label>
+      <input class="check" id="check" type="checkbox" name="check" required  ngModel>
 
       <div>
         <button

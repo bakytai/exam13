@@ -5,6 +5,7 @@ const config = require('./config');
 const users = require('./app/users');
 const places = require('./app/places');
 const images = require('./app/images');
+const reviews = require('./app/rewies')
 const app = express();
 
 const corsOptions = {
@@ -23,6 +24,7 @@ app.use(express.static('public'));
 app.use('/users', users);
 app.use('/places', places);
 app.use('/images', images);
+app.use('/reviews', reviews);
 
 const run = async () => {
     await mongoose.connect(config.mongo.db, config.mongo.options);
