@@ -3,6 +3,7 @@ const config = require('./config');
 const User = require('./models/User');
 const Place = require('./models/Place');
 const Image = require('./models/Image');
+const Reviews = require('./models/Reviews');
 const {nanoid} = require("nanoid");
 
 const run = async () => {
@@ -84,7 +85,7 @@ const run = async () => {
         user: user2,
         place: place1,
         image: 'delpapa2.jpeg'
-    },{
+    }, {
         user: user2,
         place: place2,
         image: 'vinotekaPhoto1.jpeg'
@@ -93,6 +94,72 @@ const run = async () => {
         place: place2,
         image: 'vinotekphoto2.jpeg'
     });
+
+    const [rev1, rev2, rev3, rev4, rev5, rev6, rev7, rev8] = await Reviews.create({
+        user: user1,
+        place: place3,
+        dateTime: Date.now().toString(),
+        message: 'I like this place',
+        kitchenRate: 5,
+        serviceRate: 5,
+        interiorRate: 5
+    }, {
+        user: user1,
+        place: place3,
+        dateTime: Date.now().toString(),
+        message: 'Amazing! But so slow(',
+        kitchenRate: 5,
+        serviceRate: 3,
+        interiorRate: 4
+    }, {
+        user: user1,
+        place: place4,
+        dateTime: Date.now().toString(),
+        message: 'Amazing! But so slow(',
+        kitchenRate: 2,
+        serviceRate: 3,
+        interiorRate: 4
+    }, {
+        user: user1,
+        place: place4,
+        dateTime: Date.now().toString(),
+        message: 'Amazing! But so slow(',
+        kitchenRate: 3,
+        serviceRate: 3,
+        interiorRate: 4
+    }, {
+        user: user2,
+        place: place1,
+        dateTime: Date.now().toString(),
+        message: 'So cool!',
+        kitchenRate: 5,
+        serviceRate: 5,
+        interiorRate: 4
+    }, {
+        user: user2,
+        place: place1,
+        dateTime: Date.now().toString(),
+        message: 'Delicious!',
+        kitchenRate: 5,
+        serviceRate: 4,
+        interiorRate: 4
+    }, {
+        user: user2,
+        place: place2,
+        dateTime: Date.now().toString(),
+        message: 'I want to go this place again!',
+        kitchenRate: 5,
+        serviceRate: 4,
+        interiorRate: 4
+    }, {
+        user: user2,
+        place: place2,
+        dateTime: Date.now().toString(),
+        message: 'Unappetizing',
+        kitchenRate: 2,
+        serviceRate: 4,
+        interiorRate: 4
+    },)
 
     await mongoose.connection.close();
 };

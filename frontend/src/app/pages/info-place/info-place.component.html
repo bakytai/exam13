@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card class="example-card" *ngIf="placeInfo" fxLayout="row wrap" >
+  <mat-card class="example-card" *ngIf="placeInfo" fxLayout="row wrap">
     <mat-card-header style="width: 50%; margin: auto 0">
       <mat-card-title style="font-weight: bold; font-size: 50px">{{ placeInfo.title}}</mat-card-title>
     </mat-card-header>
@@ -15,7 +15,7 @@
 
       <div fxLayout="row wrap" style="padding: 10px">
         <div *ngFor="let image of gallery | async">
-          <mat-card class="example-card" style="width: 14rem; margin: 5px" >
+          <mat-card class="example-card" style="width: 14rem; margin: 5px">
             <img mat-card-xl-image [src]="image.image | image" [alt]="'Photo of ' + placeInfo.title">
           </mat-card>
         </div>
@@ -25,20 +25,79 @@
     <div class="reviews">
       <h2>Reviews: </h2>
 
-<!--      <mat-card class="example-card" *ngIf="productInfo">-->
-<!--        <mat-card-header>-->
-<!--          <mat-card-title>{{ productInfo.title}}</mat-card-title>-->
-<!--        </mat-card-header>-->
-<!--        <img mat-card-image [src]="productInfo.image | image" [alt]="productInfo.title">-->
-<!--        <mat-card-content>-->
-<!--          <mat-card-title>Category of {{ productInfo.category.title }}</mat-card-title>-->
-<!--          <p>Description: <b>{{ productInfo.description }}</b></p>-->
-<!--          <span>Product by: <b>{{ productInfo.user.displayName }}</b></span>-->
-<!--          <p>Phone Number: <b>{{ productInfo.user.phoneNumber }}</b></p>-->
-<!--        </mat-card-content>-->
+      <div fxLayout="row wrap" style="padding: 20px">
+        <div *ngFor="let review of reviews | async">
+          <mat-card class="example-card" style="width: 14rem; margin: 5px">
+            <mat-card-content>
+              <h3>On <span style="font-size: 15px">{{ review.dateTime }}</span>, <b>{{ review.user.displayName }}</b>
+                said:</h3>
+              <p> {{  review.message }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </div>
-<!--    <mat-card-actions>-->
-<!--      <button mat-button (click)="deleteProduct(productInfo._id)">DELETE</button>-->
-<!--    </mat-card-actions>-->
+
+
+    <div class="reviews-form" *ngIf="user">
+      <h2>Add review</h2>
+
+      <form (ngSubmit)="createReview()" #reviewForm="ngForm">
+        <mat-form-field appearance="outline" class="textarea">
+          <mat-label>Enter message</mat-label>
+          <textarea matInput rows="10" required name="message" ngModel></textarea>
+        </mat-form-field>
+        <div class="select">
+          <mat-form-field appearance="fill">
+            <mat-label>Quality of food</mat-label>
+            <mat-select  name="kitchenRate" required ngModel>
+              <mat-option
+                *ngFor="let number of ratingNumber"
+                [value]="number">{{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Service quality</mat-label>
+            <mat-select name="serviceRate" required ngModel>
+              <mat-option
+                *ngFor="let number of ratingNumber"
+                [value]="number">{{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Interior</mat-label>
+            <mat-select name="interiorRate" required ngModel>
+              <mat-option
+                *ngFor="let number of ratingNumber"
+                [value]="number">{{ number }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button type="submit" mat-raised-button color="warn" [disabled]="reviewForm.invalid">
+            Add review
+          </button>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="image-form" fxLayout="column">
+      <h2>Upload new photo:</h2>
+
+      <form (ngSubmit)="addImage()" #formImage="ngForm">
+        <mat-form-field appearance="outline" style="width: 50%">
+          <mat-label>Image</mat-label>
+          <app-file-input name="image" ngModel required></app-file-input>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="warn" [disabled]="formImage.invalid">Add</button>
+      </form>
+    </div>
+
+    <!--    <mat-card-actions>-->
+    <!--      <button mat-button (click)="deleteProduct(productInfo._id)">DELETE</button>-->
+    <!--    </mat-card-actions>-->
   </mat-card>
 </div>

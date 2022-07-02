@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Image } from '../../models/image.model';
+import { Image, ImageData } from '../../models/image.model';
 
 export const fetchImagesRequest = createAction(
   '[Image] Fetch Request',
@@ -16,7 +16,7 @@ export const fetchImagesFailure = createAction(
 
 export const createImageRequest = createAction(
   '[Image] Create Request',
-  props<{imageData:ImageData}>()
+  props<{imageData: ImageData}>()
 );
 export const createImageSuccess = createAction(
   '[Image] Create Success'

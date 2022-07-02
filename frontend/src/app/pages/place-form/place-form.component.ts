@@ -27,7 +27,6 @@ export class PlaceFormComponent implements OnInit {
 
   onSubmit() {
     const placeData: PlaceData = this.form.value;
-    console.log(placeData)
     this.store.dispatch(createPlaceRequest({placeData}))
   }
 }

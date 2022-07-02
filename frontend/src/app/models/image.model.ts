@@ -9,3 +9,9 @@ export class Image {
     public image: string
   ) {}
 }
+
+export interface ImageData {
+  [key: string]: any;
+  place: string;
+  image: File;
+}

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
-import { Image } from '../models/image.model';
+import { Image, ImageData } from '../models/image.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +21,14 @@ export class ImagesService {
     );
   }
 
+  addImage(imageData: ImageData) {
+    const formData = new FormData();
+    Object.keys(imageData).forEach(key => {
+      if (imageData[key] !== null) {
+        formData.append(key, imageData[key]);
+      }
+    });
+
+    return this.http.post(environment.apiUrl + '/images', formData);
+  }
 }

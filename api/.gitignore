@@ -1,2 +1,16 @@
 node_modules
 .idea
+public/uploads/*
+!public/uploads/.gitkeep
+!public/uploads/cyclone.jpeg
+!public/uploads/cyclonePhoto.jpeg
+!public/uploads/cyclonePhoto2.jpeg
+!public/uploads/delpapa.jpeg
+!public/uploads/delpapa2.jpeg
+!public/uploads/download.jpeg
+!public/uploads/pishpek.jpeg
+!public/uploads/pishpekPhoto.jpeg
+!public/uploads/pishPhot.jpeg
+!public/uploads/vinoteka.jpg
+!public/uploads/vinotekaPhoto1.jpeg
+!public/uploads/vinotekphoto2.jpeg

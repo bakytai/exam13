@@ -12,6 +12,10 @@ const ReviewSchema = new Schema({
         required: true,
         ref: 'Place',
     },
+    dateTime: {
+        type: Date,
+        default: Date.now.toString()
+    },
     message: {
         type: String,
         required: true

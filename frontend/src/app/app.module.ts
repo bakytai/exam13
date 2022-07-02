@@ -31,6 +31,7 @@ import { CatalogComponent } from './pages/catalog/catalog.component';
 import { ImagePipe } from './pipe/image.pipe';
 import { PlaceFormComponent } from './pages/place-form/place-form.component';
 import { InfoPlaceComponent } from './pages/info-place/info-place.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { InfoPlaceComponent } from './pages/info-place/info-place.component';
     MatMenuModule,
     MatSnackBarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
