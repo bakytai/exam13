@@ -27,6 +27,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ValidateIdenticalDirective } from './directives/validate-identical.directive';
 import { MatInputModule } from '@angular/material/input';
+import { CatalogComponent } from './pages/catalog/catalog.component';
+import { ImagePipe } from './pipe/image.pipe';
+import { PlaceFormComponent } from './pages/place-form/place-form.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { MatInputModule } from '@angular/material/input';
     UserTypeDirective,
     LoginComponent,
     RegisterComponent,
-    ValidateIdenticalDirective
+    ValidateIdenticalDirective,
+    CatalogComponent,
+    ImagePipe,
+    PlaceFormComponent
   ],
   imports: [
     BrowserModule,

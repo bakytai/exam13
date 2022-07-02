@@ -1,0 +1,14 @@
+<div class="main-page">
+  <h2 style="padding-top: 20px; text-align: center; text-transform: uppercase">All places</h2>
+  <div fxLayout="row wrap" fxLayoutAlign="space-around" style="padding: 20px">
+    <div *ngFor="let place of places | async">
+      <mat-card class="example-card" style="width: 14rem; margin: 5px" >
+        <img mat-card-xl-image [src]="place.photo | image" [alt]="'Photo of ' + place.title">
+        <mat-card-content>
+          <h3 style="font-weight: bold">{{ place.title }}</h3>
+          <a mat-raised-button color="accent" [routerLink]="['/place/', place._id]">{{ place.title }}</a>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

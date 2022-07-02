@@ -12,5 +12,9 @@ export class Place {
 }
 
 export interface PlaceData {
-
+  [key: string]: any;
+  title: string;
+  description: string;
+  image: File;
+  check: boolean
 }

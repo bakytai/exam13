@@ -1,0 +1,33 @@
+<mat-card style="width: 500px; margin: 30px auto 0">
+  <h1>New place</h1>
+  <mat-card-content>
+    <div class="error" *ngIf="error | async">
+      {{ error | async }}
+    </div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm" fxLayout="column">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input name="title" required matInput ngModel/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <input name="description" required matInput ngModel/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Image</mat-label>
+        <app-file-input name="image" ngModel required></app-file-input>
+      </mat-form-field>
+
+      <input class="check" type="checkbox" name="check" required  ngModel>
+
+      <div>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="f.invalid || (loading | async)"
+        >ADD PLACE</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
