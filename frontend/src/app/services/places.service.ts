@@ -15,7 +15,17 @@ export class PlacesService {
     return this.http.get<Place[]>(environment.apiUrl + `/places`).pipe(
       map(response => {
         return response.map(data => {
-          return new Place(data._id,data.user, data.title, data.description, data.photo, data.rate);
+          return new Place(
+            data._id,
+            data.user,
+            data.title,
+            data.description,
+            data.photo,
+            data.rate,
+            data.kitchenRate,
+            data.serviceRate,
+            data.interiorRate
+          );
         });
       })
     );
@@ -24,7 +34,16 @@ export class PlacesService {
   getPlaceInfo(id: string) {
     return this.http.get<Place>(environment.apiUrl + `/places/${id}`).pipe(
       map(data => {
-        return new Place(data._id,data.user, data.title, data.description, data.photo, data.rate);
+        return new Place(
+          data._id,
+          data.user,
+          data.title,
+          data.description,
+          data.photo,
+          data.rate,
+          data.kitchenRate,
+          data.serviceRate,
+          data.interiorRate);
       })
     );
   }

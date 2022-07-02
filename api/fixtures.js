@@ -40,25 +40,37 @@ const run = async () => {
         title: 'Del Papa',
         description: 'Some desc about Italian Restaurants',
         photo: 'download.jpeg',
-        rate: 0
+        rate: 5,
+        kitchenRate: 5,
+        serviceRate: 5,
+        interiorRate: 5
     }, {
         user: user1,
         title: 'Vinoteka',
         description: 'Some desc about Vinoteka Restaurants',
         photo: 'vinoteka.jpg',
-        rate: 0
+        rate: 4,
+        kitchenRate: 4,
+        serviceRate: 4,
+        interiorRate: 4
     }, {
         user: user2,
         title: 'Cyclone',
         description: 'The «Cyclone» Restaurant was opened in order to hand down an ancient Italian tradition to the residents and guests of Bishkek city.',
         photo: 'cyclone.jpeg',
-        rate: 0
+        rate: 3,
+        kitchenRate: 3,
+        serviceRate: 3,
+        interiorRate: 3
     }, {
         user: user2,
         title: 'Restoran Pishpek',
         description: 'Ресторан Пишпек – это уникальное заведение в центре города, которое выделяется архитектурным строением, дополняя красоту Бишкека.',
         photo: 'pishpek.jpeg',
-        rate: 0
+        rate: 5,
+        kitchenRate: 5,
+        serviceRate: 5,
+        interiorRate: 5
     });
 
     const [imgOne, imgTwo, imgThree, imgFour, imgFive, imgSix, imgSeven, imgEight] = await Image.create({

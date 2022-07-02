@@ -15,6 +15,7 @@ import {
 import { ReviewsService } from '../../services/reviews.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../type';
+import { fetchPlaceRequest } from '../places/places.actions';
 
 @Injectable()
 
@@ -33,6 +34,7 @@ export class ReviewsEffects {
       map(() => createReviewsSuccess()),
       tap(() => {
         this.store.dispatch(fetchReviewsRequest({id: reviewsData.place}));
+        this.store.dispatch(fetchPlaceRequest({id: reviewsData.place}));
         this.helpers.openSnackbar('Отзыв добавлен!');
       }),
       catchError(() => of(createReviewsFailure({error: 'Wrong Data'})))

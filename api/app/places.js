@@ -37,6 +37,7 @@ router.get('/:id', async (req, res, next) => {
             return res.status(404).send({message: 'Not found place'});
         }
 
+        console.log(place)
         return res.send(place);
     } catch (e) {
         next(e);

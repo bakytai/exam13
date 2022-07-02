@@ -72,9 +72,8 @@ export class InfoPlaceComponent implements OnInit {
 
     this.place.subscribe(place => {
       this.placeInfo = <Place>place
+      console.log(this.placeInfo);
     });
-
-    console.log(this.reviews)
   }
 
   createReview() {

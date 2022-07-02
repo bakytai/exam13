@@ -19,6 +19,49 @@
       </div>
     </div>
 
+    <div class="rating-block">
+      <h2>Ratings</h2>
+
+      <ul>
+        <li>
+          Overal:
+          <ngb-rating [(rate)]="placeInfo.rate">
+            <ng-template let-fill="fill" let-index="index">
+              <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+            </ng-template>
+          </ngb-rating>
+          <span>: <b>{{ placeInfo.rate }}</b></span>
+        </li>
+        <li>
+          Quality of food:
+          <ngb-rating [(rate)]="placeInfo.kitchenRate">
+            <ng-template let-fill="fill" let-index="index">
+              <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+            </ng-template>
+          </ngb-rating>
+          <span>: <b>{{ placeInfo.kitchenRate }}</b></span>
+        </li>
+        <li>
+          Service quality:
+          <ngb-rating [(rate)]="placeInfo.serviceRate">
+            <ng-template let-fill="fill" let-index="index">
+              <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+            </ng-template>
+          </ngb-rating>
+          <span>: <b>{{ placeInfo.serviceRate }}</b></span>
+        </li>
+        <li>
+          Interior:
+          <ngb-rating [(rate)]="placeInfo.interiorRate">
+            <ng-template let-fill="fill" let-index="index">
+              <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+            </ng-template>
+          </ngb-rating>
+          <span>: <b>{{ placeInfo.interiorRate }}</b></span>
+        </li>
+      </ul>
+    </div>
+
     <div class="reviews">
       <h2>Reviews: </h2>
       <div fxLayout="row wrap" style="padding: 20px">
@@ -27,7 +70,7 @@
             <mat-card-content>
               <h3>On <span style="font-size: 15px">{{ review.dateTime }}</span>, User: <b>{{ review.user.displayName }}</b>
                 said:</h3>
-              <p> {{  review.message }}</p>
+              <p style="font-style: italic"><<{{  review.message }}>></p>
               <ul>
                 <li>
                   Quality of food
@@ -36,6 +79,7 @@
                       <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
                     </ng-template>
                   </ngb-rating>
+                  <span>: <b>{{ review.kitchenRate }}</b></span>
                 </li>
                 <li>
                   Service quality
@@ -44,6 +88,7 @@
                       <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
                     </ng-template>
                   </ngb-rating>
+                  <span>: <b>{{ review.serviceRate }}</b></span>
                 </li>
                 <li>
                   Interior
@@ -52,6 +97,7 @@
                       <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
                     </ng-template>
                   </ngb-rating>
+                  <span>: <b>{{ review.interiorRate }}</b></span>
                 </li>
               </ul>
             </mat-card-content>

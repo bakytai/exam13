@@ -7,7 +7,10 @@ export class Place {
     public title: string,
     public description: string,
     public photo: string,
-    public rate: number
+    public rate: number,
+    public kitchenRate: number,
+    public serviceRate: number,
+    public interiorRate: number
   ) {}
 }
 
